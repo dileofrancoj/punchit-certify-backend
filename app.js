@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const certificates = require("./routes/certificates");
-
+const courses = require("./routes/courses");
 var app = express();
 
 app.use(logger("dev"));
@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/certificates", certificates);
+app.use("/api/courses", courses);
 
 // catch 404 and forward to error handler
 app.use((_, res) => {

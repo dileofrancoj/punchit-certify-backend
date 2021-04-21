@@ -1,5 +1,6 @@
 const uuid = require("node-uuid");
 const pdf = require("html-pdf");
+const { upload } = require("../services/S3");
 
 const createHTMLCertificate = ({ fullName, courseName }) =>
   `<html>
@@ -50,11 +51,11 @@ const createHTMLCertificate = ({ fullName, courseName }) =>
     <body>
         <div class="container">
             <div class="logo">
-                An Organization
+                PUNCH IT
             </div>
 
             <div class="marquee">
-                Certificate of Completion
+                Certificado de asistencia al curso ${courseName}
             </div>
 
             <div class="assignment">
@@ -64,25 +65,23 @@ const createHTMLCertificate = ({ fullName, courseName }) =>
             <div class="person">
                 ${fullName}
             </div>
-
-            <div class="reason">
-                For deftly defying the laws of gravity<br/>
-                and flying high
-            </div>
         </div>
     </body>
 </html>
     `;
 
-const makePdf = (options) => {
+const makePdf = async (options) => {
   const pdfName = uuid();
   const html = createHTMLCertificate({
     fullName: options.nombre,
-    courseName: options.curso,
+    courseName: options.prod_name,
   });
-  pdf.create(html).toFile(`./certificates/${pdfName}.pdf`, (err, _) => {
-    if (err) throw new Error("No se pudo crear el PDF");
-  });
+  await pdf
+    .create(html)
+    .toFile(`./public/certificates/${pdfName}.pdf`, (err, _) => {
+      if (err) throw new Error("No se pudo crear el PDF");
+      upload(pdfName);
+    });
 
   return pdfName;
 };

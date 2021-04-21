@@ -1,0 +1,16 @@
+module.exports = {
+  T_COMPRA: "compra",
+  T_COMPRA_PROD: "compra_producto",
+  T_PROD: "producto",
+  T_ATTR: "atributo",
+  T_ATTR_VALOR: "atributo_valor",
+  T_COMBINACION: "combinacion",
+  T_STOCK_PROD: "combinacion_producto",
+  T_PROD_IMG: "producto_imagen",
+  T_CARACT: "caracteristica",
+  T_CARACT_VALOR: "caracteristica_valor",
+  T_CARACT_PROD: "prod_caracteristica",
+  T_CATEGORIA: "categoria",
+  T_USUARIOS: "usuarios",
+  T_CERTIFICADOS: "certificados",
+};
