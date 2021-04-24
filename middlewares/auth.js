@@ -1,7 +1,6 @@
 const api = require("../api");
 
 const verifyAuthentication = async (req, res, next) => {
-  console.log("IN");
   const { data } = await api.get("/auth/verify", {
     headers: {
       Authorization: req.headers.authorization,
